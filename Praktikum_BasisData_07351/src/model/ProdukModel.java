@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import helper.KoneksiDB;
 import entity.ProdukEntity;
+import javax.swing.table.DefaultTableModel;
 
 public class ProdukModel {
     private Connection con = KoneksiDB.dbConnection();
@@ -107,5 +108,21 @@ public class ProdukModel {
             System.out.println(e);
             return -1;
         }
+    }
+    
+    public DefaultTableModel listProduk(){
+        DefaultTableModel listDataTransaksi = new DefaultTableModel();
+        Object[] kolom = {"ID PRODUK","DESKRIPSI PRODUK","HARGA"};
+        listDataTransaksi.setColumnIdentifiers(kolom);
+        
+        int size = dataProduk().size();
+        for(int i = 0;i<size;i++){
+            Object[] data = new Object[3];
+            data[0] = dataProduk().get(i).getIdProduk();
+            data[1] = dataProduk().get(i).getDeskripsiProduk();
+            data[2] = dataProduk().get(i).getHarga();
+            listDataTransaksi.addRow(data);
+        }
+        return listDataTransaksi;
     }
 }

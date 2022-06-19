@@ -2,6 +2,7 @@ package controller;
 
 import entity.CustomerEntity;
 import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 public class CustomerController {
     
@@ -15,5 +16,13 @@ public class CustomerController {
     
     public ArrayList<CustomerEntity> dataCustomer(){
         return ModelObjController.customerModel.dataCustomer();
+    }
+    
+    public int getIdCustomer(String nama){
+        return ModelObjController.customerModel.getIdCustomer(nama);
+    }
+    
+    public DefaultTableModel viewCustomer(){
+        return ModelObjController.customerModel.viewCustomer();
     }
 }

@@ -2,6 +2,7 @@ package controller;
 
 import entity.ProdukEntity;
 import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 public class ProdukController {
     
@@ -31,5 +32,9 @@ public class ProdukController {
     
     public int hapusSatuDataProduk(int id){
         return ModelObjController.produkModel.hapusSatuDataProduk(id);
+    }
+    
+    public DefaultTableModel listProduk(){
+        return ModelObjController.produkModel.listProduk();
     }
 }

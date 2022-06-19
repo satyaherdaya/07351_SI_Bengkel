@@ -2,6 +2,7 @@ package controller;
 
 import entity.KasirEntity;
 import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 public class KasirController {
     
@@ -35,5 +36,9 @@ public class KasirController {
     
     public int hapusDataKasir(int id){
         return ModelObjController.kasirModel.hapusSatuDataKasir(id);
+    }
+    
+    public DefaultTableModel viewKasir(){
+        return ModelObjController.kasirModel.viewKasir();
     }
 }

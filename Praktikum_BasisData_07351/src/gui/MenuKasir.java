@@ -15,6 +15,7 @@ public class MenuKasir extends JFrame{
     private int kode;
     JButton btnviewnota = new JButton("View Nota");
     JButton btnlogout = new JButton("Logout");
+    JButton btntambahtrx = new JButton("Tambah Tansaksi");
     JTable tabelTrx = new JTable();
     JScrollPane sptrx = new JScrollPane(tabelTrx);
     JTextField textpilih = new JTextField();
@@ -26,7 +27,7 @@ public class MenuKasir extends JFrame{
     void initComponent(int cek){
         setTitle("VERIFIKASI TRANSAKSI");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1200,480);
+        setSize(1250,480);
         setLocationRelativeTo(null);
         getContentPane().setBackground(Color.white);
         setLayout(null);
@@ -37,11 +38,17 @@ public class MenuKasir extends JFrame{
         tabelTrx.setDefaultEditor(Object.class, null);
         add(sptrx);
         
-        btnviewnota.setBounds(1050, 50, 120, 25);
+        btnviewnota.setBounds(1040, 50, 180, 25);
         btnviewnota.setCursor(new Cursor(12));
         btnviewnota.setBackground(Color.black);
         btnviewnota.setForeground(Color.white);
         add(btnviewnota);
+        
+        btntambahtrx.setBounds(1040, 90, 180, 25);
+        btntambahtrx.setCursor(new Cursor(12));
+        btntambahtrx.setBackground(Color.black);
+        btntambahtrx.setForeground(Color.white);
+        add(btntambahtrx);
         
         btnlogout.setBounds(25, 20, 80, 25);
         btnlogout.setBackground(Color.white);
@@ -108,6 +115,26 @@ public class MenuKasir extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 kode = Integer.parseInt(textpilih.getText());
                 new ViewNota(cek,kode).setVisible(true);
+                dispose();
+            }
+        });
+        
+        btntambahtrx.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseEntered(MouseEvent e){
+                btntambahtrx.setForeground(Color.yellow);
+            }
+            
+            @Override
+            public void mouseExited(MouseEvent e){
+                btntambahtrx.setForeground(Color.white);
+            }
+        });
+        
+        btntambahtrx.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new MenuTambahCustomer(cek).setVisible(true);
                 dispose();
             }
         });

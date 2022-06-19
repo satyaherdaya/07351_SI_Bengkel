@@ -19,11 +19,23 @@ public class TransaksiController {
         return ModelObjController.transaksiModel.dataTransaksi();
     }
     
-    public HashMap<String,String> notaTransaksiCustomer(int id){
+    public HashMap<String,String> notaTransaksi(int id){
         return ModelObjController.transaksiModel.notaTransaksi(id);
+    }
+    
+    public DefaultTableModel notaTransaksiCustomer(int id){
+        return ModelObjController.transaksiModel.notaTransaksiCustomer(id);
     }
     
     public DefaultTableModel listTransaksi(){
         return ModelObjController.transaksiModel.listTransaksi();
+    }
+    
+    public int getIdTransaksi(int idcustomer){
+        return ModelObjController.transaksiModel.idTransaksi(idcustomer);
+    }
+    
+    public int ubahTotalHarga(int harga, int id){
+        return ModelObjController.transaksiModel.ubahTotalHarga(harga, id);
     }
 }

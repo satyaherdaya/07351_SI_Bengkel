@@ -8,16 +8,12 @@ public class TransaksiEntity {
     protected int total_harga;
     protected CustomerEntity customer;
     protected KasirEntity kasir;
-    protected DetailTransaksiEntity detailTrx;
-    protected ProdukEntity produk;
 
-    public TransaksiEntity(Timestamp tgl_transaksi, int total_harga, CustomerEntity customer, KasirEntity kasir, DetailTransaksiEntity detailTrx, ProdukEntity produk) {
-        this.tgl_transaksi = tgl_transaksi;
+
+    public TransaksiEntity(int total_harga, CustomerEntity customer, KasirEntity kasir) {
         this.total_harga = total_harga;
         this.customer = customer;
         this.kasir = kasir;
-        this.detailTrx = detailTrx;
-        this.produk = produk;
     }
     
     public TransaksiEntity(int id_transaksi, Timestamp tgl_transaksi, int total_harga, CustomerEntity customer, KasirEntity kasir) {
@@ -26,16 +22,6 @@ public class TransaksiEntity {
         this.total_harga = total_harga;
         this.customer = customer;
         this.kasir = kasir;
-    }
-
-    public TransaksiEntity(int id_transaksi, Timestamp tgl_transaksi, int total_harga, CustomerEntity customer, KasirEntity kasir, DetailTransaksiEntity detailTrx, ProdukEntity produk) {
-        this.id_transaksi = id_transaksi;
-        this.tgl_transaksi = tgl_transaksi;
-        this.total_harga = total_harga;
-        this.customer = customer;
-        this.kasir = kasir;
-        this.detailTrx = detailTrx;
-        this.produk = produk;
     }
 
     public int getIdTransaksi() {
@@ -76,21 +62,5 @@ public class TransaksiEntity {
 
     public void setKasir(KasirEntity kasir) {
         this.kasir = kasir;
-    }
-
-    public DetailTransaksiEntity getDetailTrx() {
-        return detailTrx;
-    }
-
-    public void setDetailTrx(DetailTransaksiEntity detailTrx) {
-        this.detailTrx = detailTrx;
-    }
-
-    public ProdukEntity getProduk() {
-        return produk;
-    }
-
-    public void setProduk(ProdukEntity produk) {
-        this.produk = produk;
     }
 }

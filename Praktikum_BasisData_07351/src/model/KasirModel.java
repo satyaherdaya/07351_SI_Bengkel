@@ -4,6 +4,7 @@ import entity.KasirEntity;
 import helper.KoneksiDB;
 import java.sql.*;
 import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 public class KasirModel {
     private Connection con = KoneksiDB.dbConnection();
@@ -149,5 +150,20 @@ public class KasirModel {
             System.out.println(e);
             return -1;
         }
+    }
+    
+    public DefaultTableModel viewKasir(){
+        DefaultTableModel notaTransaksiCustomer = new DefaultTableModel();
+        Object[] kolom = {"ID KASIR","NAMA KASIR"};
+        notaTransaksiCustomer.setColumnIdentifiers(kolom);
+        
+        int size = dataKasir().size();
+        for(int i = 0;i<size;i++){
+            Object[] data = new Object[2];
+            data[0] = dataKasir().get(i).getIdPegawai();
+            data[1] = dataKasir().get(i).getNamaPegawai();
+            notaTransaksiCustomer.addRow(data);
+        }
+        return notaTransaksiCustomer;
     }
 }
