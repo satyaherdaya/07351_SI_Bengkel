@@ -15,6 +15,12 @@ public class ProdukEntity {
         this.kategori = kategori;
         this.supplier = supplier;
     }
+    
+    public ProdukEntity(String deskripsi_produk, int harga, KategoriEntity kategori) {
+        this.deskripsi_produk = deskripsi_produk;
+        this.harga = harga;
+        this.kategori = kategori;
+    }
 
     public ProdukEntity(int id_produk, String deskripsi_produk, int stok, int harga, KategoriEntity kategori, SupplierEntity supplier) {
         this.id_produk = id_produk;

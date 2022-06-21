@@ -14,7 +14,7 @@ public class DetailTransaksiModel {
     
     public int insertDetailTransaksi(DetailTransaksiEntity detailTrx){
         try{
-            sql = "insert into detail_transaksi values(?,?,?,?,?)";
+            sql = "insert into detail_transaksi values(?,?,?,?)";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, detailTrx.getJumlahProduk());
             ps.setInt(2, detailTrx.getJumlahHarga());

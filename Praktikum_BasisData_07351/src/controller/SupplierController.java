@@ -2,6 +2,7 @@ package controller;
 
 import entity.SupplierEntity;
 import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 public class SupplierController {
     
@@ -31,5 +32,9 @@ public class SupplierController {
     
     public int hapusDataSupplier(int id){
         return ModelObjController.supplierModel.hapusSatuDataSupplier(id);
+    }
+    
+    public DefaultTableModel listSupplier(){
+        return ModelObjController.supplierModel.listSupplier();
     }
 }

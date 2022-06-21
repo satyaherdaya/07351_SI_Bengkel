@@ -7,14 +7,14 @@ public class DetailPerubahanEntity {
     protected String data_sebelum;
     protected String data_sesudah;
     protected ProdukEntity produk;
-    protected KasirEntity pegawai;
+    protected AdminEntity admin;
 
-    public DetailPerubahanEntity(String kategori, String data_sebelum, String data_sesudah, ProdukEntity produk, KasirEntity pegawai) {
+    public DetailPerubahanEntity(String kategori, String data_sebelum, String data_sesudah, ProdukEntity produk, AdminEntity pegawai) {
         this.kategori = kategori;
         this.data_sebelum = data_sebelum;
         this.data_sesudah = data_sesudah;
         this.produk = produk;
-        this.pegawai = pegawai;
+        this.admin = pegawai;
     }
 
     public String getKategori() {
@@ -49,11 +49,11 @@ public class DetailPerubahanEntity {
         this.produk = produk;
     }
 
-    public KasirEntity getPegawai() {
-        return pegawai;
+    public AdminEntity getPegawai() {
+        return admin;
     }
 
-    public void setPegawai(KasirEntity pegawai) {
-        this.pegawai = pegawai;
+    public void setPegawai(AdminEntity admin) {
+        this.admin = admin;
     }
 }

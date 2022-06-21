@@ -75,7 +75,7 @@ public class MenuAdmin extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 new ViewPerubahan(cek).setVisible(true);
-                dispose();                
+                dispose();           
             }
         });
         

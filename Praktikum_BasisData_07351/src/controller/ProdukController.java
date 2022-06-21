@@ -1,5 +1,6 @@
 package controller;
 
+import entity.KategoriEntity;
 import entity.ProdukEntity;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
@@ -8,6 +9,10 @@ public class ProdukController {
     
     public int insertDataProduk(ProdukEntity produk){
         return ModelObjController.produkModel.insertDataProduk(produk);
+    }
+    
+    public int insertDataProdukJasa(String deskripsi,int harga,KategoriEntity kategori){
+        return ModelObjController.produkModel.insertDataProdukJasa(deskripsi, harga, kategori);
     }
     
     public ProdukEntity satuDataProduk(int id){

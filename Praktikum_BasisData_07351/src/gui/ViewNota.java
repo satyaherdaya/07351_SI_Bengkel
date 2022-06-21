@@ -16,7 +16,7 @@ public class ViewNota extends JFrame{
     JScrollPane sptrx = new JScrollPane(tabelKasir);
     JTextField textpilih = new JTextField();
     
-    JLabel labeljudul = new JLabel("Ubah Data User");
+    JLabel labeljudul = new JLabel("Nota SI Bengkel");
     JLabel labelid = new JLabel("No Transaksi");
     JLabel labelnamacustomer = new JLabel("Nama Customer");
     JLabel labeltgltrx = new JLabel("Tanggal Transaksi");
@@ -56,71 +56,55 @@ public class ViewNota extends JFrame{
 //            System.out.println("nama kasir        : "+tx.get("nama_kasir"));
 //        }
         
-        labeljudul.setBounds(120, 50, 130, 25);
+        labeljudul.setBounds(300, 30, 200, 100);
+        labeljudul.setFont(new Font(null,1,20));
         add(labeljudul);
         
-        labelid.setBounds(30,100,80,25);
+        labelid.setBounds(30,120,150,25);
         add(labelid);
-        tfid.setBounds(100,100,130,25);
+        tfid.setBounds(180,120,200,25);
         tfid.setText(tx.get("no_transaksi"));
         tfid.setEditable(false);
         add(tfid);
         
-        labelnamacustomer.setBounds(30,150,80,25);
+        labelnamacustomer.setBounds(30,170,150,25);
         add(labelnamacustomer);
-        tfnamacustomer.setBounds(100,150,130,25);
+        tfnamacustomer.setBounds(180,170,200,25);
         tfnamacustomer.setText(tx.get("nama_customer"));
         tfnamacustomer.setEditable(false);
         add(tfnamacustomer);
         
-        labeltgltrx.setBounds(30,200,80,25);
+        labeltgltrx.setBounds(30,220,150,25);
         add(labeltgltrx);
-        tftgltrx.setBounds(100,200,130,25);
+        tftgltrx.setBounds(180,220,200,25);
         tftgltrx.setText(tx.get("tgl_transaksi"));
         tftgltrx.setEditable(false);
         add(tftgltrx);
         
-        sptrx.setBounds(20, 250, 600, 350);
-        tabelKasir.setModel(ControllerObject.transaksiController.notaTransaksiCustomer(idtrx));
+        sptrx.setBounds(30, 270, 600, 150);
+        tabelKasir.setModel(ControllerObject.transaksiController.notaTransaksiCustomer2(idtrx));
         tabelKasir.setDefaultEditor(Object.class, null);
         add(sptrx);
         
-        labelnamakasir.setBounds(30,400,80,25);
-        add(labelnamakasir);
-        tfnamakasir.setBounds(100,400,130,25);
-        tfnamakasir.setText(tx.get("total_harga"));
-        tfnamakasir.setEditable(false);
-        add(tfnamakasir);
+        labeltotalharga.setBounds(30,440,150,25);
+        add(labeltotalharga);
+        tftotalharga.setBounds(180,440,200,25);
+        tftotalharga.setText(tx.get("total_harga"));
+        tftotalharga.setEditable(false);
+        add(tftotalharga);
         
-        labelnamakasir.setBounds(30,400,80,25);
+        labelnamakasir.setBounds(30,490,150,25);
         add(labelnamakasir);
-        tfnamakasir.setBounds(100,400,130,25);
+        tfnamakasir.setBounds(180,490,200,25);
         tfnamakasir.setText(tx.get("nama_kasir"));
         tfnamakasir.setEditable(false);
         add(tfnamakasir);
         
-        btnback.setBounds(25, 20, 80, 25);
+        btnback.setBounds(30, 20, 80, 25);
         btnback.setBackground(Color.white);
         btnback.setCursor(new Cursor(12));
         btnback.setBorder(null);
         add(btnback);
-        
-        tabelKasir.addMouseListener(new MouseAdapter(){
-            @Override
-            public void mouseClicked(MouseEvent e){
-                int i = tabelKasir.getSelectedRow();
-                textpilih.setText(ControllerObject.kasirController.viewKasir().getValueAt(i, 0).toString());
-            }
-        });
-        
-        tabelKasir.addMouseListener(new MouseAdapter(){
-            @Override
-            public void mouseClicked(MouseEvent e){
-                int i = tabelKasir.getSelectedRow();
-                textpilih.setText(ControllerObject.transaksiController.listTransaksi().getValueAt(i, 0).toString());
-                kode = Integer.parseInt(textpilih.getText());
-            }
-        });
         
         btnback.addMouseListener(new MouseAdapter(){
             @Override
@@ -137,7 +121,7 @@ public class ViewNota extends JFrame{
         btnback.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                new PilihCustomer(cek).setVisible(true);
+                new MenuKasir(cek).setVisible(true);
                 dispose();
             }
         });

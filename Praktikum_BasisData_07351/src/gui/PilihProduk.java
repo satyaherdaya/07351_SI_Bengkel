@@ -11,7 +11,7 @@ import java.awt.event.MouseEvent;
 public class PilihProduk extends JFrame{
     private int kode;
     JButton btnback = new JButton("<<Back");
-    JButton btnpilih = new JButton("Pilih Kasir");
+    JButton btnpilih = new JButton("Pilih Produk");
     JTable tabelKasir = new JTable();
     JScrollPane sptrx = new JScrollPane(tabelKasir);
     JTextField textpilih = new JTextField();

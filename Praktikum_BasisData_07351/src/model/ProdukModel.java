@@ -1,5 +1,6 @@
 package model;
 
+import entity.KategoriEntity;
 import java.sql.*;
 import java.util.ArrayList;
 import helper.KoneksiDB;
@@ -35,7 +36,7 @@ public class ProdukModel {
             Statement s = con.createStatement();
             ResultSet rs = s.executeQuery(sql);
             while(rs.next()){
-                data.add(new ProdukEntity(rs.getInt("id_produk"),rs.getString("deskripsi_produk"),rs.getInt("harga_produk"),rs.getInt("stok"),kategori.satuDataKategori(rs.getInt("kategoriID")),supplier.dataSatuSupplier(rs.getInt("supplierID"))));
+                data.add(new ProdukEntity(rs.getInt("id_produk"),rs.getString("deskripsi_produk"),rs.getInt("stok"),rs.getInt("harga_produk"),kategori.satuDataKategori(rs.getInt("kategoriID")),supplier.dataSatuSupplier(rs.getInt("supplierID"))));
             }
         }catch(SQLException e){
             System.out.println(e);
@@ -52,6 +53,20 @@ public class ProdukModel {
             ps.setInt(3, produk.getStok());
             ps.setInt(4, produk.getKategori().getIdKategori());
             ps.setInt(5, produk.getSupplier().getIdSupplier());
+            return ps.executeUpdate();
+        }catch(SQLException e){
+            System.out.println(e);
+            return -1;
+        }
+    }
+    
+    public int insertDataProdukJasa(String deskripsi,int harga,KategoriEntity kategori){
+        try{
+            sql = "insert into produk values(null,?,?,null,?,null)";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, deskripsi);
+            ps.setInt(2, harga);
+            ps.setInt(3, kategori.getIdKategori());
             return ps.executeUpdate();
         }catch(SQLException e){
             System.out.println(e);

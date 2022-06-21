@@ -8,7 +8,7 @@ public class KategoriController {
         return ModelObjController.kategoriModel.dataKategori();
     }
     
-    public KategoriEntity dataKategori(int id){
+    public KategoriEntity dataSatuKategori(int id){
         return ModelObjController.kategoriModel.satuDataKategori(id);
     }
     

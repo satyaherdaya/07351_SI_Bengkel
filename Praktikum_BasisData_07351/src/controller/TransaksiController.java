@@ -23,6 +23,14 @@ public class TransaksiController {
         return ModelObjController.transaksiModel.notaTransaksi(id);
     }
     
+    public HashMap<String,ArrayList<String>> notaTransaksiBanyakProduk(int id){
+        return ModelObjController.transaksiModel.notaTransaksiBanyakPorduct(id);
+    }
+    
+    public DefaultTableModel notaTransaksiCustomer2(int id){
+        return ModelObjController.transaksiModel.notaTransaksiCustomer2(id);
+    }
+    
     public DefaultTableModel notaTransaksiCustomer(int id){
         return ModelObjController.transaksiModel.notaTransaksiCustomer(id);
     }

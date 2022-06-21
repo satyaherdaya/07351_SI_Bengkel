@@ -4,6 +4,7 @@ import entity.SupplierEntity;
 import helper.KoneksiDB;
 import java.sql.*;
 import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 public class SupplierModel {
     private Connection con = KoneksiDB.dbConnection();
@@ -103,5 +104,22 @@ public class SupplierModel {
             System.out.println(e);
             return -1;
         }
+    }
+    
+    public DefaultTableModel listSupplier(){
+        DefaultTableModel listDataTransaksi = new DefaultTableModel();
+        Object[] kolom = {"ID SUPPLIER","NAMA SUPPLIER","NOTELP SUPPLIER","ALAMAT SUPPLIER"};
+        listDataTransaksi.setColumnIdentifiers(kolom);
+        
+        int size = dataSupplier().size();
+        for(int i = 0;i<size;i++){
+            Object[] data = new Object[4];
+            data[0] = dataSupplier().get(i).getIdSupplier();
+            data[1] = dataSupplier().get(i).getNamaSupplier();
+            data[2] = dataSupplier().get(i).getNotelpSupplier();
+            data[3] = dataSupplier().get(i).getAlamatSupplier();            
+            listDataTransaksi.addRow(data);
+        }
+        return listDataTransaksi;
     }
 }

@@ -92,7 +92,7 @@ public class TransaksiModel {
     
     public int ubahTotalHarga(int harga, int id){
         try{
-            sql = "update produk set total_harga = ? where id_transaksi = ?";
+            sql = "update transaksi set total_harga = ? where id_transaksi = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, harga);
             ps.setInt(2, id);
@@ -139,6 +139,49 @@ public class TransaksiModel {
         return trx;
     }
     
+    public HashMap<String,ArrayList<String>> notaTransaksiBanyakPorduct(int id){
+        HashMap<String,ArrayList<String>> trx = new HashMap();
+        ArrayList<String> data1 = new ArrayList<>();
+        ArrayList<String> data2 = new ArrayList<>();
+        ArrayList<String> data3 = new ArrayList<>();
+        ArrayList<String> data4 = new ArrayList<>();
+        ArrayList<String> data5 = new ArrayList<>();
+        ArrayList<String> data6 = new ArrayList<>();
+        ArrayList<String> data7 = new ArrayList<>();
+        ArrayList<String> data8 = new ArrayList<>();
+        ArrayList<String> data9 = new ArrayList<>();
+        try{
+            sql = "select transaksi.id_transaksi as no_transaksi,transaksi.tgl_transaksi,customer.nama_customer,produk.deskripsi_produk,produk.harga_produk,detail_transaksi.jumlah_produk,detail_transaksi.jumlah_harga,transaksi.total_harga,kasir.nama_kasir from transaksi inner join detail_transaksi on(transaksi.id_transaksi=detail_transaksi.transaksiID) inner join produk on(detail_transaksi.produkID=produk.id_produk) inner join customer on(customer.id_customer=transaksi.customerID) inner join kasir on(kasir.id_kasir=transaksi.kasirID) where detail_transaksi.transaksiID like ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                data1.add(String.valueOf(rs.getInt("no_transaksi")));
+                data2.add(String.valueOf(rs.getTimestamp("tgl_transaksi")));
+                data3.add(rs.getString("nama_customer"));
+                data4.add(rs.getString("deskripsi_produk"));
+                data5.add(String.valueOf(rs.getInt("harga_produk")));
+                data6.add(String.valueOf(rs.getInt("jumlah_produk")));
+                data7.add(String.valueOf(rs.getInt("jumlah_harga")));
+                data8.add(String.valueOf(rs.getInt("total_harga")));
+                data9.add(rs.getString("nama_kasir"));
+                
+                trx.put("no_transaksi", data1);
+                trx.put("tgl_transaksi", data2);
+                trx.put("nama_customer", data3);
+                trx.put("deskripsi_produk", data4);
+                trx.put("harga_produk", data5);
+                trx.put("jumlah_produk", data6);
+                trx.put("jumlah_harga", data7);
+                trx.put("total_harga", data8);
+                trx.put("nama_kasir", data9);
+            }
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+        return trx;
+    }
+    
     public DefaultTableModel listTransaksi(){
         DefaultTableModel listDataTransaksi = new DefaultTableModel();
         Object[] kolom = {"ID TRANSAKSI","TANGGAL TRANSAKSI","TOTAL HARGA","NAMA CUSTOMER","NAMA KASIR"};
@@ -163,12 +206,29 @@ public class TransaksiModel {
         notaTransaksiCustomer.setColumnIdentifiers(kolom);
         
         int size = notaTransaksi(id).size();
-        for(int i = 0;i<size;i++){
+        for(int i = 0;i<size/9;i++){
             Object[] data = new Object[4];
             data[0] = notaTransaksi(id).get("deskripsi_produk");
             data[1] = notaTransaksi(id).get("harga_produk");
             data[2] = notaTransaksi(id).get("jumlah_produk");
             data[3] = notaTransaksi(id).get("jumlah_harga");
+            notaTransaksiCustomer.addRow(data);
+        }
+        return notaTransaksiCustomer;
+    }
+    
+    public DefaultTableModel notaTransaksiCustomer2(int id){
+        DefaultTableModel notaTransaksiCustomer = new DefaultTableModel();
+        Object[] kolom = {"DESKRIPSI PRODUK","HARGA PRODUK","JUMLAH PRODUK","JUMLAH HARGA"};
+        notaTransaksiCustomer.setColumnIdentifiers(kolom);
+        
+        int size = notaTransaksiBanyakPorduct(id).size()*notaTransaksiBanyakPorduct(id).get("deskripsi_produk").size();
+        for(int i = 0;i<size/9;i++){
+            Object[] data = new Object[4];
+            data[0] = notaTransaksiBanyakPorduct(id).get("deskripsi_produk").get(i);
+            data[1] = notaTransaksiBanyakPorduct(id).get("harga_produk").get(i);
+            data[2] = notaTransaksiBanyakPorduct(id).get("jumlah_produk").get(i);
+            data[3] = notaTransaksiBanyakPorduct(id).get("jumlah_harga").get(i);
             notaTransaksiCustomer.addRow(data);
         }
         return notaTransaksiCustomer;
