@@ -58,4 +58,21 @@ public class DetailTransaksiModel {
         }
         return listDataTransaksi;
     }
+    
+    public int totalHarga(int id){
+        int totalharga = 0;
+        try{
+            sql = "select sum(jumlah_harga) as total_harga from detail_transaksi where transaksiID like ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                totalharga = rs.getInt("total_harga");
+            }
+            return totalharga;
+        }catch(SQLException e){
+            System.out.println(e);
+            return -1;
+        }
+    }
 }

@@ -16,4 +16,8 @@ public class DetailTransaksiController {
     public DefaultTableModel listProdukDibeli(int idtransaksi){
         return ModelObjController.detailTrxModel.listProdukDibeli(idtransaksi);
     }
+    
+    public int totalHarga(int id){
+        return ModelObjController.detailTrxModel.totalHarga(id);
+    }
 }

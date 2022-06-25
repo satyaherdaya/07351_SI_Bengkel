@@ -42,4 +42,12 @@ public class ProdukController {
     public DefaultTableModel listProduk(){
         return ModelObjController.produkModel.listProduk();
     }
+    
+    public DefaultTableModel listProdukLengkap(){
+        return ModelObjController.produkModel.listProdukLengkap();
+    }
+    
+    public int kurangiSatuStock(int idTransaksi,int idProduk){
+        return ModelObjController.produkModel.kurangiSatuStock(idTransaksi, idProduk);
+    }
 }

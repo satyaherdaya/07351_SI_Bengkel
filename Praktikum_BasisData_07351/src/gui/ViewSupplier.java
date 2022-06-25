@@ -13,6 +13,7 @@ public class ViewSupplier extends JFrame{
     JButton btnback = new JButton("<<Back");
     JButton btnadd = new JButton("Tambah Supplier");
     JButton btndelete = new JButton("Hapus Supplier");
+    JButton btnrefresh = new JButton("Refresh");
 //    JButton btnupdate = new JButton("Delete Supplier");
     JTable tabelSupplier = new JTable();
     JScrollPane sptrx = new JScrollPane(tabelSupplier);
@@ -41,6 +42,12 @@ public class ViewSupplier extends JFrame{
         btnadd.setBackground(Color.black);
         btnadd.setForeground(Color.white);
         add(btnadd);
+        
+        btnrefresh.setBounds(550, 20, 80, 25);
+        btnrefresh.setBackground(Color.white);
+        btnrefresh.setCursor(new Cursor(12));
+        btnrefresh.setBorder(null);
+        add(btnrefresh);
         
         btndelete.setBounds(650, 90, 150, 25);
         btndelete.setCursor(new Cursor(12));
@@ -71,6 +78,25 @@ public class ViewSupplier extends JFrame{
             @Override
             public void mouseExited(MouseEvent e){
                 btnback.setForeground(Color.black);
+            }
+        });
+        
+        btnrefresh.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseEntered(MouseEvent e){
+                btnrefresh.setForeground(Color.blue);
+            }
+            
+            @Override
+            public void mouseExited(MouseEvent e){
+                btnrefresh.setForeground(Color.black);
+            }
+        });
+        
+        btnrefresh.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tabelSupplier.setModel(ControllerObject.supplierController.listSupplier());
             }
         });
         
@@ -130,9 +156,8 @@ public class ViewSupplier extends JFrame{
                     "Alamat : ", alamat,
                     "Notelp : ",notelp
                 };
-                JOptionPane.showInputDialog(message);
-                if(JOptionPane.showInputDialog(message).length()>0){
-                    ControllerObject.supplierController.insertDataSupplier(new SupplierEntity(nama.getText(),alamat.getText(),notelp.getText()));
+                int option = JOptionPane.showConfirmDialog(null,message,"Tambah Supplier",JOptionPane.OK_CANCEL_OPTION);
+                if(option==JOptionPane.OK_OPTION){
                     if(ControllerObject.supplierController.insertDataSupplier(new SupplierEntity(nama.getText(),alamat.getText(),notelp.getText()))>0){
                         JOptionPane.showMessageDialog(null, "supplier berhasil ditambahkan");
                     }else{

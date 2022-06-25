@@ -18,9 +18,10 @@ import javax.swing.JTextField;
 public class ViewPerubahan extends JFrame{
     private int kode;
     JButton btnback = new JButton("<<Back");
-    JButton btnadd = new JButton("Tambah Perubahan");    
-    JTable tabelKasir = new JTable();
-    JScrollPane sptrx = new JScrollPane(tabelKasir);
+//    JButton btnadd = new JButton("Tambah Perubahan");
+//    JButton btnrefresh = new JButton("Refresh");    
+    JTable tabelPerubahan = new JTable();
+    JScrollPane sptrx = new JScrollPane(tabelPerubahan);
     JTextField textpilih = new JTextField();
     
     public ViewPerubahan(int cek) {
@@ -37,15 +38,21 @@ public class ViewPerubahan extends JFrame{
         setVisible(true);
         
         sptrx.setBounds(20, 50, 600, 350);
-        tabelKasir.setModel(ControllerObject.detUbahController.listDetailPerubahan());
-        tabelKasir.setDefaultEditor(Object.class, null);
+        tabelPerubahan.setModel(ControllerObject.detUbahController.listDetailPerubahan());
+        tabelPerubahan.setDefaultEditor(Object.class, null);
         add(sptrx);
         
-        btnadd.setBounds(650, 50, 150, 25);
-        btnadd.setCursor(new Cursor(12));
-        btnadd.setBackground(Color.black);
-        btnadd.setForeground(Color.white);
-        add(btnadd);
+//        btnadd.setBounds(650, 50, 150, 25);
+//        btnadd.setCursor(new Cursor(12));
+//        btnadd.setBackground(Color.black);
+//        btnadd.setForeground(Color.white);
+//        add(btnadd);
+        
+//        btnrefresh.setBounds(550, 20, 80, 25);
+//        btnrefresh.setBackground(Color.white);
+//        btnrefresh.setCursor(new Cursor(12));
+//        btnrefresh.setBorder(null);
+//        add(btnrefresh);
         
         btnback.setBounds(25, 20, 80, 25);
         btnback.setBackground(Color.white);
@@ -53,10 +60,10 @@ public class ViewPerubahan extends JFrame{
         btnback.setBorder(null);
         add(btnback);
         
-        tabelKasir.addMouseListener(new MouseAdapter(){
+        tabelPerubahan.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseClicked(MouseEvent e){
-                int i = tabelKasir.getSelectedRow();
+                int i = tabelPerubahan.getSelectedRow();
                 textpilih.setText(ControllerObject.detUbahController.listDetailPerubahan().getValueAt(i, 0).toString());
             }
         });
@@ -80,44 +87,62 @@ public class ViewPerubahan extends JFrame{
                 dispose();
             }
         });
-          
-        btnadd.addMouseListener(new MouseAdapter(){
-            @Override
-            public void mouseEntered(MouseEvent e){
-                btnadd.setForeground(Color.yellow);
-            }
-            
-            @Override
-            public void mouseExited(MouseEvent e){
-                btnadd.setForeground(Color.white);
-            }
-        });
         
-        btnadd.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JTextField kategori = new JTextField();
-                JTextField datasebelum = new JTextField();
-                JTextField datasesudah = new JTextField();
-                JTextField produkid = new JTextField();
-                JTextField adminid = new JTextField();
-                Object[] message = {
-                    "Keterangan : ", kategori,
-                    "Data Sebelum : ", datasebelum,
-                    "Data Sesudah : ",datasesudah,
-                    "id Produk : ",produkid,
-                    "id Admin : ",adminid
-                };
-                JOptionPane.showInputDialog(message);
-                if(JOptionPane.showInputDialog(message).length()>0){
-                    ControllerObject.detUbahController.insertDataPerubahan(new DetailPerubahanEntity(kategori.getText(),datasebelum.getText(),datasesudah.getText(),ControllerObject.produkController.satuDataProduk(Integer.parseInt(produkid.getText())),ControllerObject.adminController.dataSatuAdmin(Integer.parseInt(adminid.getText()))));
-                    if(ControllerObject.detUbahController.insertDataPerubahan(new DetailPerubahanEntity(kategori.getText(),datasebelum.getText(),datasesudah.getText(),ControllerObject.produkController.satuDataProduk(Integer.parseInt(produkid.getText())),ControllerObject.adminController.dataSatuAdmin(Integer.parseInt(adminid.getText()))))>0){
-                        JOptionPane.showMessageDialog(null, "perubahan berhasil ditambahkan");
-                    }else{
-                        JOptionPane.showMessageDialog(null, "perubahan gagal ditambahkan");
-                    }
-                }
-            }
-        });
+//        btnrefresh.addMouseListener(new MouseAdapter(){
+//            @Override
+//            public void mouseEntered(MouseEvent e){
+//                btnrefresh.setForeground(Color.blue);
+//            }
+//            
+//            @Override
+//            public void mouseExited(MouseEvent e){
+//                btnrefresh.setForeground(Color.black);
+//            }
+//        });
+        
+//        btnrefresh.addActionListener(new ActionListener(){
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                tabelPerubahan.setModel(ControllerObject.detUbahController.listDetailPerubahan());
+//            }
+//        });
+          
+//        btnadd.addMouseListener(new MouseAdapter(){
+//            @Override
+//            public void mouseEntered(MouseEvent e){
+//                btnadd.setForeground(Color.yellow);
+//            }
+//            
+//            @Override
+//            public void mouseExited(MouseEvent e){
+//                btnadd.setForeground(Color.white);
+//            }
+//        });
+//        
+//        btnadd.addActionListener(new ActionListener(){
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                JTextField kategori = new JTextField();
+//                JTextField datasebelum = new JTextField();
+//                JTextField datasesudah = new JTextField();
+//                JTextField produkid = new JTextField();
+//                JTextField adminid = new JTextField();
+//                Object[] message = {
+//                    "Keterangan : ", kategori,
+//                    "Data Sebelum : ", datasebelum,
+//                    "Data Sesudah : ",datasesudah,
+//                    "id Produk : ",produkid,
+//                    "id Admin : ",adminid
+//                };
+//                int option = JOptionPane.showConfirmDialog(null,message,"Tambah Perubahan",JOptionPane.OK_CANCEL_OPTION);
+//                if(option==JOptionPane.OK_OPTION){
+//                    if(ControllerObject.detUbahController.insertDataPerubahan(new DetailPerubahanEntity(kategori.getText(),datasebelum.getText(),datasesudah.getText(),ControllerObject.produkController.satuDataProduk(Integer.parseInt(produkid.getText())),ControllerObject.adminController.dataSatuAdmin(Integer.parseInt(adminid.getText()))))>0){
+//                        JOptionPane.showMessageDialog(null, "perubahan berhasil ditambahkan");
+//                    }else{
+//                        JOptionPane.showMessageDialog(null, "perubahan gagal ditambahkan");
+//                    }
+//                }
+//            }
+//        });
     }
 }

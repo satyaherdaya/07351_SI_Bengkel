@@ -13,11 +13,13 @@ public class RincianTransaksi extends JFrame{
     JButton btntambahtrx = new JButton("Tambah Transaksi");
     JButton btnback = new JButton("<<back");
     JLabel labeljudul = new JLabel("Tambah Transaksi");
-    JLabel labeltotalharga = new JLabel("Total Harga");
-    JTextField tftotalharga = new JTextField();
+    //JLabel labeltotalharga = new JLabel("Total Harga");
+    //JTextField tftotalharga = new JTextField();
     JTable tabelDetailTransaksi = new JTable();
     JScrollPane sptrx = new JScrollPane(tabelDetailTransaksi);
     JTextField textpilih = new JTextField();
+    JTextField textpilih2 = new JTextField();
+    JTextField textpilih3 = new JTextField();
     
     public RincianTransaksi(int cek,int idcustomer,int idkasir,int idtransaksi) {
         initComponent(cek, idcustomer, idkasir, idtransaksi);
@@ -40,10 +42,10 @@ public class RincianTransaksi extends JFrame{
         labeljudul.setBounds(120, 50, 130, 25);
         add(labeljudul);
         
-        labeltotalharga.setBounds(30, 420, 80, 25);
-        add(labeltotalharga);
-        tftotalharga.setBounds(120, 420, 130, 25);
-        add(tftotalharga);
+//        labeltotalharga.setBounds(30, 420, 80, 25);
+//        add(labeltotalharga);
+//        tftotalharga.setBounds(120, 420, 130, 25);
+//        add(tftotalharga);
         
         btntambahproduk.setBounds(650, 50, 140, 25);
         btntambahproduk.setBackground(Color.black);
@@ -63,6 +65,16 @@ public class RincianTransaksi extends JFrame{
         btnback.setBackground(Color.white);
         btnback.setForeground(Color.black);
         add(btnback);
+        
+        tabelDetailTransaksi.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e){
+                int i = tabelDetailTransaksi.getSelectedRow();
+                textpilih.setText(ControllerObject.detTrxController.listProdukDibeli(idtransaksi).getValueAt(i, 0).toString());
+                textpilih2.setText(ControllerObject.detTrxController.listProdukDibeli(idtransaksi).getValueAt(i, 2).toString());
+                textpilih3.setText(ControllerObject.detTrxController.listProdukDibeli(idtransaksi).getValueAt(i, 3).toString());
+            }
+        });
         
         tabelDetailTransaksi.addMouseListener(new MouseAdapter(){
             @Override
@@ -111,9 +123,11 @@ public class RincianTransaksi extends JFrame{
         btntambahtrx.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                int totalHarga = Integer.parseInt(tftotalharga.getText());
+                
+                int totalHarga = ControllerObject.detTrxController.totalHarga(idtransaksi);
                 ControllerObject.transaksiController.ubahTotalHarga(totalHarga, idtransaksi);
                 if(ControllerObject.transaksiController.ubahTotalHarga(totalHarga, idtransaksi)>0){
+                    //ControllerObject.produkController.ubahStokProduk(, WIDTH)
                     JOptionPane.showMessageDialog(null, "transaksi berhasil ditambahkan");
                     new MenuKasir(cek).setVisible(true);
                 }else{
@@ -142,9 +156,5 @@ public class RincianTransaksi extends JFrame{
                 dispose();
             }
         });
-    }
-    
-    void kosong(){
-        tftotalharga.setText(null);
     }
 }

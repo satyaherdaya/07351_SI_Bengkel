@@ -16,7 +16,7 @@ public class DetailPerubahanModel {
         try{
             sql = "insert into detail_perubahan values(?,?,?,?,?)";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, rubah.getKategori());
+            ps.setString(1, rubah.getKeterangan());
             ps.setString(2, rubah.getDataSebelum());
             ps.setString(3, rubah.getDataSesudah());
             ps.setInt(4, rubah.getProduk().getIdProduk());
@@ -51,7 +51,7 @@ public class DetailPerubahanModel {
         int size = dataDetailPerubahan().size();
         for(int i = 0;i<size;i++){
             Object[] data = new Object[5];
-            data[0] = dataDetailPerubahan().get(i).getKategori();
+            data[0] = dataDetailPerubahan().get(i).getKeterangan();
             data[1] = dataDetailPerubahan().get(i).getDataSebelum();
             data[2] = dataDetailPerubahan().get(i).getDataSesudah();
             data[3] = dataDetailPerubahan().get(i).getProduk().getDeskripsiProduk();

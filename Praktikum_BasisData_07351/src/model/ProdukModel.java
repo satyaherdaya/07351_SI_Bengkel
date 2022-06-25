@@ -115,7 +115,7 @@ public class ProdukModel {
     
     public int hapusSatuDataProduk(int id){
         try{
-            sql = "delete from ptoduk where id_produk = ?";
+            sql = "delete from produk where id_produk = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             return ps.executeUpdate();
@@ -125,19 +125,53 @@ public class ProdukModel {
         }
     }
     
+    public int kurangiSatuStock(int idTransaksi,int idProduk){
+        try{
+            sql = "update produk inner join detail_transaksi on(produk.id_produk=detail_transaksi.produkID) set produk.stok=produk.stok-detail_transaksi.jumlah_produk where detail_transaksi.transaksiID=? and detail_transaksi.produkID=?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idTransaksi);
+            ps.setInt(2, idProduk);
+            return ps.executeUpdate();
+        }catch(SQLException e){
+            System.out.println(e);
+            return -1;
+        }
+    }
+    
     public DefaultTableModel listProduk(){
         DefaultTableModel listDataTransaksi = new DefaultTableModel();
-        Object[] kolom = {"ID PRODUK","DESKRIPSI PRODUK","HARGA"};
+        Object[] kolom = {"ID PRODUK","DESKRIPSI PRODUK","HARGA","KATEGORI"};
         listDataTransaksi.setColumnIdentifiers(kolom);
         
         int size = dataProduk().size();
         for(int i = 0;i<size;i++){
-            Object[] data = new Object[3];
+            Object[] data = new Object[4];
             data[0] = dataProduk().get(i).getIdProduk();
             data[1] = dataProduk().get(i).getDeskripsiProduk();
             data[2] = dataProduk().get(i).getHarga();
+            data[3] = dataProduk().get(i).getKategori().getNamaKategori();
             listDataTransaksi.addRow(data);
         }
         return listDataTransaksi;
     }
+    
+    public DefaultTableModel listProdukLengkap(){
+        DefaultTableModel listDataTransaksi = new DefaultTableModel();
+        Object[] kolom = {"ID PRODUK","DESKRIPSI PRODUK","STOK","HARGA","NAMA KATEGORI"};
+        listDataTransaksi.setColumnIdentifiers(kolom);
+        
+        int size = dataProduk().size();
+        for(int i = 0;i<size;i++){
+            Object[] data = new Object[5];
+            data[0] = dataProduk().get(i).getIdProduk();
+            data[1] = dataProduk().get(i).getDeskripsiProduk();
+            data[2] = dataProduk().get(i).getStok();
+            data[3] = dataProduk().get(i).getHarga();
+            data[4] = dataProduk().get(i).getKategori().getNamaKategori();
+            listDataTransaksi.addRow(data);
+        }
+        return listDataTransaksi;
+    }
+    
+    
 }

@@ -116,11 +116,12 @@ public class ViewKasir extends JFrame{
                     "Username : ", username,
                     "Password : ", password
                 };
-                JOptionPane.showInputDialog(message);
-                if(JOptionPane.showInputDialog(message).length()>0){
+                int option = JOptionPane.showConfirmDialog(null,message,"Tambah Kasir",JOptionPane.OK_CANCEL_OPTION);
+                if(option==JOptionPane.OK_OPTION){
                     ControllerObject.kasirController.insertDataKasir(new KasirEntity(nama.getText(),alamat.getText(),notelp.getText(),username.getText(),password.getText()));
                     if(ControllerObject.kasirController.insertDataKasir(new KasirEntity(nama.getText(),alamat.getText(),notelp.getText(),username.getText(),password.getText()))>0){
                         JOptionPane.showMessageDialog(null, "kasir berhasil ditambahkan");
+                        tabelKasir.setModel(ControllerObject.kasirController.viewKasir());
                     }else{
                         JOptionPane.showMessageDialog(null, "kasir gagal ditambahkan");
                     }

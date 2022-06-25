@@ -3,26 +3,26 @@ package entity;
 import java.sql.Timestamp;
 
 public class DetailPerubahanEntity {
-    protected String kategori;
+    protected String keterangan;
     protected String data_sebelum;
     protected String data_sesudah;
     protected ProdukEntity produk;
     protected AdminEntity admin;
 
     public DetailPerubahanEntity(String kategori, String data_sebelum, String data_sesudah, ProdukEntity produk, AdminEntity pegawai) {
-        this.kategori = kategori;
+        this.keterangan = kategori;
         this.data_sebelum = data_sebelum;
         this.data_sesudah = data_sesudah;
         this.produk = produk;
         this.admin = pegawai;
     }
 
-    public String getKategori() {
-        return kategori;
+    public String getKeterangan() {
+        return keterangan;
     }
 
-    public void setKategori(String kategori) {
-        this.kategori = kategori;
+    public void setKeterangan(String keterangan) {
+        this.keterangan = keterangan;
     }
 
     public String getDataSebelum() {

@@ -59,16 +59,23 @@ public class TransaksiModel {
     }
     
     public int idTransaksi(int idcustomer){
-        int id=0;
+        ArrayList<Integer> id = new ArrayList<>();
+        int idtrx = 0;
         try{
-            sql = "select id_transaksi from transaksi where customerID=? order by tgl_transaksi DESC";
+            sql = "select id_transaksi from transaksi where customerID=?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idcustomer);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                id = rs.getInt("id_transaksi");
+                id.add(rs.getInt("id_transaksi"));
             }
-            return id;
+            for(Integer i : id){
+                idtrx=id.indexOf(i);
+                if(idtrx<i){
+                    idtrx=i;
+                }
+            }
+            return idtrx;
         }catch(SQLException e){
             System.out.println(e);
             return -1;
